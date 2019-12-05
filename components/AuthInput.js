@@ -53,7 +53,7 @@ const Container = styled.View`
 
 const TextInput = styled.TextInput`
   text-align: center;
-  width: ${constants.width / 2};
+  width: ${constants.width / 1.7};
   padding: 10px;
   background-color: ${props => props.theme.greyColor};
   border: 0.5px solid ${props => props.theme.darkGreyColor};

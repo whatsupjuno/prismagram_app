@@ -9,8 +9,7 @@ import AuthButton from "../../components/AuthButton";
 import AuthInput from "../../components/AuthInput";
 
 export default ({ navigation }) => {
-  const emailInput = useInput("");
-
+  const emailInput = useInput(navigation.getParam("email", ""));
   const [loading, setLoading] = useState(false);
   const [requestSecretMutation] = useMutation(LOG_IN, {
     variables: {
@@ -33,12 +32,12 @@ export default ({ navigation }) => {
         data: { requestSecret }
       } = await requestSecretMutation();
       if (requestSecret) {
-        Alert.alert("Check your email");
-        navigation.navigate("Confirm");
+        Alert.alert("Check your Secret Code from your mailbox");
+        navigation.navigate("Confirm", { email: value });
         return;
       } else {
         Alert.alert("Account not found");
-        navigation.navigate("Signup");
+        navigation.navigate("SignUp", { email: value });
       }
     } catch (e) {
       console.log(e);
@@ -59,10 +58,16 @@ export default ({ navigation }) => {
           autoCorrect={false}
         />
         <AuthButton loading={loading} onPress={handleLogin} text="Log In" />
+        <Touchable onPress={() => navigation.navigate("AuthHome")}>
+          <Text>Go First</Text>
+        </Touchable>
       </View>
     </TouchableWithoutFeedback>
   );
 };
+
+const Text = styled.Text``;
+const Touchable = styled.TouchableOpacity``;
 
 const View = styled.View`
   justify-content: center;

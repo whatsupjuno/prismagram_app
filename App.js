@@ -2,6 +2,7 @@
 // //TouchableOpacity = 터치 액션을 가능하게 함
 
 import React, { useState, useEffect } from "react";
+import { View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { AppLoading } from "expo";
 import * as Font from "expo-font";
