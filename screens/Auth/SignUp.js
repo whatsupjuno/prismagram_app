@@ -4,7 +4,7 @@ import { TouchableWithoutFeedback, Keyboard } from "react-native";
 import { Alert } from "react-native";
 import { useMutation } from "react-apollo-hooks";
 import * as Facebook from "expo-facebook";
-import { Google } from "expo";
+import * as Google from "expo-google-app-auth";
 
 import AuthButton from "../../components/AuthButton";
 import AuthInput from "../../components/AuthInput";
@@ -17,7 +17,7 @@ export default ({ navigation }) => {
   const emailInput = useInput(navigation.getParam("email", ""));
   const usernameInput = useInput("");
   const [loading, setLoading] = useState(false);
-  const [createAccountMutation] = useMutation(CREATE_ACCOUNT, {
+  const createAccountMutation = useMutation(CREATE_ACCOUNT, {
     variables: {
       username: usernameInput.value,
       email: emailInput.value,
@@ -57,12 +57,11 @@ export default ({ navigation }) => {
       setLoading(false);
     }
   };
-
   const fbLogin = async () => {
     try {
       setLoading(true);
       const { type, token } = await Facebook.logInWithReadPermissionsAsync(
-        "2437846576444335",
+        "821708471611339",
         {
           permissions: ["public_profile", "email"]
         }
@@ -73,11 +72,6 @@ export default ({ navigation }) => {
         );
         const { email, first_name, last_name } = await response.json();
         updateFormData(email, first_name, last_name);
-        // emailInput.setValue(email);
-        // fNameInput.setValue(first_name);
-        // lNameInput.setValue(last_name);
-        // const [username] = email.split("@");
-        // usernameInput.setValue(username);
         setLoading(false);
       } else {
         // type === 'cancel'
@@ -86,10 +80,12 @@ export default ({ navigation }) => {
       alert(`Facebook Login Error: ${message}`);
     }
   };
-
   const googleLogin = async () => {
-    const GOOGLE_ID =
-      "197992685258-6u0isnpjsrs7dc1il65ec5tn7ts7vm73.apps.googleusercontent.com";
+    const GOOGLE_iOS_ID =
+      "175907845927-fpsne0snub3nqkr2ogjqrmfu20ti4p2g.apps.googleusercontent.com";
+    const GOOGLE_AND_ID =
+      "175907845927-ndt80jnjn550gh4gs369fca7028t3jh4.apps.googleusercontent.com";
+    3;
     try {
       setLoading(true);
       const result = await Google.logInAsync({
@@ -118,7 +114,6 @@ export default ({ navigation }) => {
     const [username] = email.split("@");
     usernameInput.setValue(username);
   };
-
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View>
@@ -162,9 +157,6 @@ export default ({ navigation }) => {
             text="Connect Google"
           />
         </GoogleContainer>
-        <Touchable onPress={() => navigation.navigate("AuthHome")}>
-          <Text>Go First</Text>
-        </Touchable>
       </View>
     </TouchableWithoutFeedback>
   );

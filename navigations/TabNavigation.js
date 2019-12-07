@@ -10,7 +10,6 @@ import Notifications from "../screens/Tabs/Notifications";
 import Profile from "../screens/Tabs/Profile";
 import NavIcon from "../components/NavIcon";
 import MessagesLink from "../components/MessagesLink";
-import { blue } from "ansi-colors";
 
 const stackFactory = (initialRoute, customConfig) =>
   createStackNavigator({
