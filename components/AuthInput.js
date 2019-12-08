@@ -23,6 +23,7 @@ const AuthInput = ({
       autoCapitalize={autoCapitalize}
       onSubmitEditing={onSubmitEditing}
       autoCorrect={autoCorrect}
+      value={value}
     />
   </Container>
 );
