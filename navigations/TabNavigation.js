@@ -7,6 +7,7 @@ import { createStackNavigator } from "react-navigation-stack";
 import Home from "../screens/Tabs/Home";
 import Search from "../screens/Tabs/Search";
 import Notifications from "../screens/Tabs/Notifications";
+import Detail from "../screens/Detail";
 import Profile from "../screens/Tabs/Profile";
 import NavIcon from "../components/NavIcon";
 import MessagesLink from "../components/MessagesLink";
@@ -19,7 +20,8 @@ const stackFactory = (initialRoute, customConfig) =>
         ...customConfig,
         headerStyle: { backgroundColor: "#EFEEEF" }
       }
-    }
+    },
+    Detail
   });
 
 export default createBottomTabNavigator(
@@ -103,6 +105,7 @@ export default createBottomTabNavigator(
     }
   },
   {
+    initialRouteName: "Search",
     tabBarOptions: {
       showLabel: false,
       tabStyle: {
